@@ -1,4 +1,4 @@
 class Board {
-	private Piece board[15][15];
-
+	private String board[15][15];
+	
 }

@@ -1,3 +1,3 @@
-public abstract class Player {
-	public abstract Board getMove();
+public class Player {
+	
 }
