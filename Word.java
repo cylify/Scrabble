@@ -1,1 +1,3 @@
-Word.java
+class Word {
+	
+}
