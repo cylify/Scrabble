@@ -1,4 +1,4 @@
-class Letter {
+class Letter extends Tile {
 	private char letter;
 	private int val;
 
@@ -53,6 +53,7 @@ class Letter {
 			put('Q', 10);
 			put('Z', 10);
 		}};
-		return letterAndScore;
+		return letterScore;
 	}
+
 }
