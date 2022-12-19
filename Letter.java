@@ -52,6 +52,7 @@ class Letter {
 			put('X', 8);
 			put('Q', 10);
 			put('Z', 10);
+			put(' ', 0);
 		}};
 		return letterScore;
 	}

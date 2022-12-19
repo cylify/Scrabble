@@ -47,6 +47,7 @@ class Bag {
 			put('X', 1);
 			put('Q', 1);
 			put('Z', 1);
+			put(' ', 2);
 		}};
 		return bag;
 	}
