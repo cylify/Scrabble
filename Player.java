@@ -1,30 +1,33 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 class Player {
 	private String name;
 	private int playerScore;
 	private ArrayList<Letter> playerRack;
-	private int playerRackSize;
 
 	public Player(String name, int playerScore) {
-		this.playerRackSize = 7;
-		this.playerRack = getPlayerRack();
+		this.playerRack = new ArrayList<>();
 		this.name = name;
 		this.playerScore = playerScore;
+		this.playerRack = getPlayerRack();
 	}
 
 	private ArrayList<Letter> getPlayerRack() {
-		ArrayList<Letter> bag = getBag();
-		ArrayList<Letter> playerRack = new ArrayList<>();
+		ArrayList<Letter> bag = Bag.getBag();
+		ArrayList<Letter> rack = new ArrayList<>();
 		Collections.shuffle(bag);
+		int playerRackSize = 7;
 
-		for(int i = 0; i < this.playerRackSize; i++) {
-			playerRack.add(bag.get(i));
+		for(int i = 0; i < playerRackSize; i++) {
+			rack.add(bag.get(i));
 		}
-		return playerRack;
+		return rack;
 
 	}
 
 	public int getPlayerScore() {
-		return this.playerScore
+		return this.playerScore;
 	}
 
 	public String getName() {

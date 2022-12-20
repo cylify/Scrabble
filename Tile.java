@@ -1,9 +1,10 @@
-class Tile {
+
+public class Tile {
 	enum SpecialTile {
-	    DoubleLetterScore("DL", 2),
-	    TripleLetterScore("TL", 3),
-	    DoubleWordScore("DW", 2),
-	    TripleWordScore("TW", 3);
+	    DOUBLELETTERSCORE("DL", 2),
+	    TRIPLELETTERSCORE("TL", 3),
+	    DOUBLEWORDSCORE("DW", 2),
+	    TRIPLEWORDSCORE("TW", 3);
 
 	    private final String abbreviation;
 	    private final int multiplier;
@@ -22,35 +23,21 @@ class Tile {
 	    }
 	}
 
+	public void applyStar() {
 
-	public void placeTile(int row, int col, char tile) {
-		board[row][col] = tile;
 	}
 
-	public char getTile(int row, int col) {
-    	return board[row][col];
-  	}
-
-	public char[][] applyDW() {
-		char[][] temp = new temp[15][15];
-
+	public void applyDW() {
 		for(int i= 0; i < 5; ++i)
-			temp[i][i] = '*';
+			Board.board[i][i] = '*';
 
 		for(int j = 0; j < 5; ++j)
-			temp[j][14-j] = '*';
+			Board.board[j][14-j] = '*';
 
 		for(int k = 10; k < 14; ++k)
-            temp[k][14 - k] = '*';
-        
+            Board.board[k][14 - k] = '*';
 
         for(int l = 10; l < 14; ++l) 
-            temp[l][l] = '*';
-        
-        return temp;
-	}
-
-	public char[][] applyDL() {
-		
+            Board.board[l][l] = '*';
 	}
 }

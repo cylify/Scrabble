@@ -1,4 +1,6 @@
-class Letter {
+import java.util.HashMap;
+
+public class Letter {
 	private Character letter;
 	private Integer val;
 
@@ -7,11 +9,11 @@ class Letter {
 		this.letter = letter;
 	}
 
-	public getLetter() {
+	public Character getLetter() {
 		return this.letter;
 	}
 
-	public getVal() {
+	public Integer getVal() {
 		return this.val;
 	}
 
