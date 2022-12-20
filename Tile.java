@@ -1,21 +1,22 @@
 
 public class Tile {
 	enum SpecialTile {
-	    DOUBLELETTERSCORE("DL", 2),
-	    TRIPLELETTERSCORE("TL", 3),
-	    DOUBLEWORDSCORE("DW", 2),
-	    TRIPLEWORDSCORE("TW", 3);
+	    DOUBLELETTERSCORE("=", 2),
+	    TRIPLELETTERSCORE("#", 3),
+	    DOUBLEWORDSCORE("!", 2),
+	    TRIPLEWORDSCORE("%", 3),
+		STAR("\u2606", 2);
 
-	    private final String abbreviation;
+	    private final String symbol;
 	    private final int multiplier;
 
-	    SpecialTile(String abbreviation, int multiplier) {
-	        this.abbreviation = abbreviation;
+	    SpecialTile(String symbol, int multiplier) {
+	        this.symbol = symbol;
 	        this.multiplier = multiplier;
 	    }
 
-	    public String getAbbreviation() {
-	        return abbreviation;
+	    public String getsymbol() {
+	        return symbol;
 	    }
 
 	    public int getMultiplier() {
@@ -24,23 +25,25 @@ public class Tile {
 	}
 
 	public void applyStar() {
-		Board.board[7][7] = "\u2606";
+		Board.board[7][7] = SpecialTile.STAR.symbol;
 	}
 
 	public void applyDW() {
 		for(int i = 1; i < 5; i++) {
-			Board.board[i][i] = "*";
+			Board.board[i][i] = SpecialTile.DOUBLEWORDSCORE.symbol;
 		}
 
+		for(int j = 1; j < 5; j++) {
+			Board.board[j][14 - j] = SpecialTile.DOUBLEWORDSCORE.symbol;
+		}
 
-		for(int j = 1; j < 5; j++)
-			Board.board[j][14 - j] = "*";
+		for(int k = 10; k < 14; k++) {
+            Board.board[k][14 - k] = SpecialTile.DOUBLEWORDSCORE.symbol;
+		}
 
-		for(int k = 10; k < 14; k++)
-            Board.board[k][14 - k] = "*";
-
-        for(int l = 10; l < 14; l++) 
-            Board.board[l][l] = "*";
+        for(int l = 10; l < 14; l++) {
+            Board.board[l][l] = SpecialTile.DOUBLEWORDSCORE.symbol;
+        }
 	}
 
 	public void applyDL() {

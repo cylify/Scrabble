@@ -30,10 +30,6 @@ public class Board extends Tile {
 		}
 	}
 
-	public void placeTile(int row, int col, String tile) {
-		board[row][col] = tile;
-	}
-
 	public String getTile(int row, int col) {
 		return board[row][col];
 	}
@@ -41,7 +37,6 @@ public class Board extends Tile {
 
 	public static void main(String[] args) {
 		Board board = new Board(16);
-		// board.placeTile(7, 8, 'A');
 		board.applyDW();
 		board.applyStar();
 		board.printBoard();
