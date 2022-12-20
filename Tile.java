@@ -28,8 +28,10 @@ public class Tile {
 	}
 
 	public void applyDW() {
-		for(int i = 1; i < 5; i++)
+		for(int i = 1; i < 5; i++) {
 			Board.board[i][i] = "*";
+		}
+
 
 		for(int j = 1; j < 5; j++)
 			Board.board[j][14 - j] = "*";
