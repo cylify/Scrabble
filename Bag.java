@@ -11,11 +11,9 @@ public class Bag {
 
 	public <K> ArrayList<K> applyBag(HashMap<K, Integer> tempBag) {
 		ArrayList<K> newbag = new ArrayList<>();
-		for(int i = 0; i < 100; i++) {
-			for(Entry<K, Integer> entry : tempBag.entrySet()) {
-				for(int j = 0; j < entry.getValue(); j++) {
-					newbag.add(entry.getKey());
-				}
+		for(Entry<K, Integer> entry : tempBag.entrySet()) {
+			for(int j = 0; j < entry.getValue(); j++) {
+				newbag.add(entry.getKey());
 			}
 		}
 		return newbag;

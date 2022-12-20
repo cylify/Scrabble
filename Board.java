@@ -2,17 +2,17 @@ import java.util.Arrays;
 
 public class Board extends Tile {
 	private int board_size;
-	public static char board[][];
-	private final char blank;
+	public static String board[][];
+	private final String blank;
 
 	public Board(int board_size) {
 		this.board_size = board_size;
-		board = new char[board_size][board_size];
-		this.blank = ' ';
+		board = new String[board_size][board_size];
+		this.blank = " ";
 		board = fillArray();
 	}
 
-	public char[][] fillArray() {
+	public String[][] fillArray() {
 		for(int i = 0; i < this.board_size; ++i) {
 			Arrays.fill(board[i], blank);
 		}
@@ -20,30 +20,30 @@ public class Board extends Tile {
 	}
 
 	public void printBoard() {
-		for(int i = 0; i < this.board_size; i++) {
+		for(int i = 0; i < this.board_size - 1; i++) {
 			for(int j = 0; j < this.board_size; j++) {
-				if(j == 14)
+				if(j == this.board_size - 1)
 					System.out.println(" |");
 				else
 					System.out.print(" | " + board[i][j]);
 			}
-
 		}
 	}
 
-	public void placeTile(int row, int col, char tile) {
+	public void placeTile(int row, int col, String tile) {
 		board[row][col] = tile;
 	}
 
-	public char getTile(int row, int col) {
+	public String getTile(int row, int col) {
 		return board[row][col];
 	}
 
 
 	public static void main(String[] args) {
-		Board board = new Board(15);
+		Board board = new Board(16);
 		// board.placeTile(7, 8, 'A');
 		board.applyDW();
+		board.applyStar();
 		board.printBoard();
 	}
 
@@ -55,15 +55,15 @@ public class Board extends Tile {
 		this.board_size = board_size;
 	}
 
-	public static char[][] getBoard() {
+	public static String[][] getBoard() {
 		return board;
 	}
 
-	public void setBoard(char[][] newboard) {
+	public void setBoard(String[][] newboard) {
 		board = newboard;
 	}
 
-	public char getBlank() {
+	public String getBlank() {
 		return blank;
 	}
 }

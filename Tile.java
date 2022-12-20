@@ -24,20 +24,32 @@ public class Tile {
 	}
 
 	public void applyStar() {
-
+		Board.board[7][7] = "\u2606";
 	}
 
 	public void applyDW() {
-		for(int i= 0; i < 5; ++i)
-			Board.board[i][i] = '*';
+		for(int i = 1; i < 5; i++)
+			Board.board[i][i] = "*";
 
-		for(int j = 0; j < 5; ++j)
-			Board.board[j][14-j] = '*';
+		for(int j = 1; j < 5; j++)
+			Board.board[j][14 - j] = "*";
 
-		for(int k = 10; k < 14; ++k)
-            Board.board[k][14 - k] = '*';
+		for(int k = 10; k < 14; k++)
+            Board.board[k][14 - k] = "*";
 
-        for(int l = 10; l < 14; ++l) 
-            Board.board[l][l] = '*';
+        for(int l = 10; l < 14; l++) 
+            Board.board[l][l] = "*";
+	}
+
+	public void applyDL() {
+
+	}
+
+	public void applyTW() {
+
+	}
+
+	public void applyTL() {
+		
 	}
 }

@@ -5,10 +5,12 @@ class Player {
 	private String name;
 	private int playerScore;
 	private ArrayList<Letter> playerRack;
+	private int currentRackSize;
 
-	public Player(String name, int playerScore) {
+	public Player(String name, int playerScore, int currentRackSize) {
 		this.playerRack = new ArrayList<>();
 		this.name = name;
+		this.currentRackSize = currentRackSize;
 		this.playerScore = playerScore;
 		this.playerRack = getPlayerRack();
 	}
@@ -23,7 +25,6 @@ class Player {
 			rack.add(bag.get(i));
 		}
 		return rack;
-
 	}
 
 	public int getPlayerScore() {
