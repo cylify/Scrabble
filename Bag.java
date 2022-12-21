@@ -7,6 +7,7 @@ public class Bag {
 
 	public Bag() {
 		bagOfLetters = applyBag(getTempBag());
+		mix();
 	}
 
 	public <K> ArrayList<K> applyBag(HashMap<K, Integer> tempBag) {
@@ -49,7 +50,35 @@ public class Bag {
 			put(new Letter('Z', 10), 1);
 			put(new Letter(' ', 0), 2);
 		}};
+
 		return bag;
+	}
+
+	public Letter takeLetter() {
+		if(bagOfLetters.size() <= 0);
+			// throw new ...;
+		Letter l = bagOfLetters.get(0);
+		bagOfLetters.remove(0);
+		System.out.println(bagOfLetters.size() + " letters remaining in bag.");
+		return l;
+	}
+
+	public void mix() {
+		Collections.shuffle(bagOfLetters);
+	}
+
+	public int getRemaining() {
+		return bagOfLetters.size();
+	}
+
+	public boolean ifEmpty() {
+		return bagOfLetters.size() == 0;
+	}
+
+	public Letter changeLetter(Letter old) {
+		bagOfLetters.add(old);
+		mix();
+		return takeLetter();
 	}
 
 	public static ArrayList<Letter> getBag() {

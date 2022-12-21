@@ -39,6 +39,7 @@ public class Board extends Tile {
 		Board board = new Board(16);
 		board.applyDW();
 		board.applyStar();
+		board.applyDL();
 		board.printBoard();
 	}
 

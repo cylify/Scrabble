@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
-class Player {
+public class Player {
 	private String name;
 	private int playerScore;
 	private ArrayList<Letter> playerRack;
-	private int currentRackSize;
+	protected final int rackSize = 7;
 
-	public Player(String name, int playerScore, int currentRackSize) {
+	public Player(String name) {
 		this.playerRack = new ArrayList<>();
 		this.name = name;
-		this.currentRackSize = currentRackSize;
-		this.playerScore = playerScore;
+		this.playerScore = 0;
 		this.playerRack = getPlayerRack();
 	}
 
@@ -25,6 +25,10 @@ class Player {
 			rack.add(bag.get(i));
 		}
 		return rack;
+	}
+
+	public void increaseScore(int val) {
+		this.playerScore += val;
 	}
 
 	public int getPlayerScore() {
@@ -41,5 +45,23 @@ class Player {
 
 	public void setPlayerScore(int playerScore) {
 		this.playerScore = playerScore;
+	}
+
+	public boolean rackFilled() {
+		return playerRack.size() >= rackSize;
+	}
+
+	public void addLetter(Letter letter) {
+		playerRack.add(letter);
+	}
+
+	public void removeLetter(Letter letter) {
+		playerRack.remove(letter);
+	}
+
+	public void refillRack(Bag bag) {
+		while(!rackFilled()) {
+			addLetter(bag.takeLetter());
+		}
 	}
 }

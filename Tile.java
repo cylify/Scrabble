@@ -47,7 +47,10 @@ public class Tile {
 	}
 
 	public void applyDL() {
-
+		Board.board[0][3] = SpecialTile.DOUBLELETTERSCORE.symbol;
+		Board.board[0][11] = SpecialTile.DOUBLELETTERSCORE.symbol;
+		Board.board[3][0] = SpecialTile.DOUBLELETTERSCORE.symbol;
+		Board.board[3][15] = SpecialTile.DOUBLELETTERSCORE.symbol;
 	}
 
 	public void applyTW() {
