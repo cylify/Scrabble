@@ -24,7 +24,7 @@ public class Tile {
 
 	@Override
 	public String toString() {
-		return (char) (this.x + 'A') + Integer.toString(this.y + 1);
+		return (char)(this.x + 'A') + Integer.toString(this.y + 1);
 	}
 
 	public boolean checkCoordinates(int xCoord, int yCoord) {
@@ -33,15 +33,15 @@ public class Tile {
 		return correct;
     }
 
-    public int getLetterMultiplier() {
+    // public int getLetterMultiplier() {
 
-    }
+    // }
 
 
-    public int getWordMultiplier() {
-    	if(type.getSymbol().equals(TileType.DOUBLELETTERSCORE.getSymbol()))
-    		return TileType.DOUBLELETTER.multiplier;
-    }
+    // public int getWordMultiplier() {
+    // 	if(type.getSymbol().equals(TileType.DOUBLELETTER.getSymbol()))
+    // 		return TileType.DOUBLELETTER.getMultiplier();
+    // }
 
 	public Letter getLetter() {
 		return letter;

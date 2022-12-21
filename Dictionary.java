@@ -25,12 +25,12 @@ public class Dictionary {
 		}
 	}
 
-	public static wordExists(String word) {
+	public static boolean wordExists(String word) {
 		if(word.contains("_")) {
 			boolean exists = false;
 
 			for(char i = 'a'; i < 'z'; i++) {
-				if(wordExists(word.replace("_"), String.valueOf(i)));
+				if(wordExists(word.replace("_", String.valueOf(i))));
 				exists = true;
 			}
 			return exists;

@@ -1,9 +1,9 @@
 public enum TileType {
 	PLAINTILE(" ", 1),
-    DOUBLELETTERSCORE("=", 2),
-    TRIPLELETTERSCORE("#", 3),
-    DOUBLEWORDSCORE("!", 2),
-    TRIPLEWORDSCORE("%", 3),
+    DOUBLELETTER("=", 2),
+    TRIPLELETTER("#", 3),
+    DOUBLEWORD("!", 2),
+    TRIPLEWORD("%", 3),
 	STAR("\u2606", 2);
 
     private final String symbol;
