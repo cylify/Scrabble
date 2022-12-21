@@ -28,12 +28,9 @@ public class Word {
 
 	public void placeWord() {
 		String word = in.nextLine();
-
-
-		in.close();
 	}
 
-	public String coordsOfWords() {
+	// public String coordsOfWords() {
 
-	}
+	// }
 }

@@ -1,63 +1,77 @@
-
 public class Tile {
-	enum SpecialTile {
-	    DOUBLELETTERSCORE("=", 2),
-	    TRIPLELETTERSCORE("#", 3),
-	    DOUBLEWORDSCORE("!", 2),
-	    TRIPLEWORDSCORE("%", 3),
-		STAR("\u2606", 2);
+	private Letter letter;
+	private int x;
+	private int y;
 
-	    private final String symbol;
-	    private final int multiplier;
+	private TileType type;
 
-	    SpecialTile(String symbol, int multiplier) {
-	        this.symbol = symbol;
-	        this.multiplier = multiplier;
-	    }
-
-	    public String getsymbol() {
-	        return symbol;
-	    }
-
-	    public int getMultiplier() {
-	        return multiplier;
-	    }
-	}
-
-	public void applyStar() {
-		Board.board[7][7] = SpecialTile.STAR.symbol;
-	}
-
-	public void applyDW() {
-		for(int i = 1; i < 5; i++) {
-			Board.board[i][i] = SpecialTile.DOUBLEWORDSCORE.symbol;
+	public Tile(int x, int y, TileType type) {
+		if(checkCoordinates(x,y)) {
+			this.x = x;
+			this.y = y;
+			this.type = type;
+			this.letter = null;
 		}
-
-		for(int j = 1; j < 5; j++) {
-			Board.board[j][14 - j] = SpecialTile.DOUBLEWORDSCORE.symbol;
-		}
-
-		for(int k = 10; k < 14; k++) {
-            Board.board[k][14 - k] = SpecialTile.DOUBLEWORDSCORE.symbol;
-		}
-
-        for(int l = 10; l < 14; l++) {
-            Board.board[l][l] = SpecialTile.DOUBLEWORDSCORE.symbol;
-        }
 	}
 
-	public void applyDL() {
-		Board.board[0][3] = SpecialTile.DOUBLELETTERSCORE.symbol;
-		Board.board[0][11] = SpecialTile.DOUBLELETTERSCORE.symbol;
-		Board.board[3][0] = SpecialTile.DOUBLELETTERSCORE.symbol;
-		Board.board[3][15] = SpecialTile.DOUBLELETTERSCORE.symbol;
+	public Tile(Tile tile) {
+		setLetter(tile.getLetter());
+		this.x = tile.getX();
+		this.y = tile.getY();
+		this.type = tile.getType();
 	}
 
-	public void applyTW() {
 
+	@Override
+	public String toString() {
+		return (char) (this.x + 'A') + Integer.toString(this.y + 1);
 	}
 
-	public void applyTL() {
-		
+	public boolean checkCoordinates(int xCoord, int yCoord) {
+		boolean correct = true;
+		if(xCoord < 0 || yCoord < 0 || xCoord > 14 || yCoord > 14) { correct = false; }
+		return correct;
+    }
+
+    public int getLetterMultiplier() {
+
+    }
+
+
+    public int getWordMultiplier() {
+    	if(type == TileType.DOUBLELETTER.symbol)
+    		return TileType.DOUBLELETTER.multiplier;
+    }
+
+	public Letter getLetter() {
+		return letter;
+	}
+
+	public void setLetter(Letter letter) {
+		this.letter = letter;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public TileType getType() {
+		return type;
+	}
+
+	public void setType(TileType type) {
+		this.type = type;
 	}
 }

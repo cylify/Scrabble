@@ -1,4 +1,4 @@
-enum TileType {
+public enum TileType {
 	PLAINTILE(" ", 1),
     DOUBLELETTERSCORE("=", 2),
     TRIPLELETTERSCORE("#", 3),
