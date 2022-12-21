@@ -39,7 +39,7 @@ public class Tile {
 
 
     public int getWordMultiplier() {
-    	if(type == TileType.DOUBLELETTER.symbol)
+    	if(type.getSymbol().equals(TileType.DOUBLELETTERSCORE.getSymbol()))
     		return TileType.DOUBLELETTER.multiplier;
     }
 
