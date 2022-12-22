@@ -15,6 +15,28 @@ public class Board{
 		return board[x][y];
 	}
 
+	private Tile getNextTile(Tile currentTile, Direction dir) {
+        try {
+            if(dir == Direction.HORIZONTAL)
+                return board[currentTile.getX() + 1][currentTile.getY()];
+            else
+                return board[currentTile.getX()][currentTile.getY() + 1];
+        } catch(Exception e) {
+            throw new OutOfBoundsException();
+        }
+    }
+
+    private Tile getPreviousTile(Tile currentTile, Direction dir) throws OutOfBoundsException {
+        try {
+            if(dir == Direction.HORIZONTAL)
+                return board[currentTile.getX() - 1][currentTile.getY()];
+            else
+                return board[currentTile.getX()][currentTile.getY() - 1];
+        } catch(Exception e) {
+            throw new OutOfBoundsException();
+        }
+    }
+
 	private void fillBoard() {
         for(int i = 0; i < board_size; i++) {
             for(int j = 0; j < board_size; j++) {
