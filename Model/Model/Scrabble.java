@@ -18,7 +18,7 @@ class Scrabble {
         board = new Board();
         bag = new Bag();
 
-        round = 0;
+        this.round = 0;
     }
 
     public Scrabble(ArrayList<Player> players) throws WrongCoordinateException, NoLettersInBagException {
@@ -27,7 +27,7 @@ class Scrabble {
         board = new Board();
         bag = new Bag();
 
-        round = 0;
+        this.round = 0;
         turn = (new Random()).nextInt(players.size());
 
         for (Player p : players)
