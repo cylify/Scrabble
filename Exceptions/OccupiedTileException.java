@@ -1,4 +1,5 @@
 package Exceptions;
+import Model.Tile;
 
 public class OccupiedTileException extends Exception {
     private Tile tile;

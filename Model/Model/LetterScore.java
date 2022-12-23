@@ -1,3 +1,5 @@
+package Model;
+
 public enum LetterScore {
 	A(1),
 	B(3),

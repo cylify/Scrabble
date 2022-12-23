@@ -1,3 +1,5 @@
+package Model;
+
 public enum TileType {
 	PLAINTILE(" ", 1),
     DOUBLELETTER("=", 2),

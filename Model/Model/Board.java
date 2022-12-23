@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 import Exceptions.*;
 
@@ -79,34 +81,35 @@ public class Board{
         }
     }
 
-    public int playWord(Word word) throws OutOfBoundsException, AloneWordException {
+    public int playWord(Word word) throws OutOfBoundsException, AloneWordException, NoLetterInCenterException {
         int score = checkInsertion(word);
         insertWord(word);
 
         return score;
     }
 
-    public int checkInsertion(Word word) throws OutOfBoundsException, AloneWordException {
+    public boolean checkValid(boolean validPosition, Word word) throws NoLetterInCenterException {
+        if(word.getDirection() == Direction.VERTICAL) {
+            if(word.getOrigin().getX() != 7) {
+                throw new NoLetterInCenterException();
+            } else if(word.getOrigin().getY() > 7 || word.getOrigin().getY() + word.getLetters().size() < 7) {
+                throw new NoLetterInCenterException();
+            }
+        } else {
+            if(word.getOrigin().getY() != 7) {
+                throw new NoLetterInCenterException();
+            } else if(word.getOrigin().getX() > 7 || word.getOrigin().getX() + word.getLetters().size() < 7) {
+                throw new NoLetterInCenterException();
+            }
+        }
+        validPosition = true;
+        return validPosition;
+    }
+
+    public int checkInsertion(Word word) throws OutOfBoundsException, AloneWordException, NoLetterInCenterException {
         boolean validPosition = false;
 
-        if (board[7][7].isEmpty()) {
-
-            if (word.getDirection() == Direction.VERTICAL) {
-                if (word.getOrigin().getX() != 7) {
-                    // throw new NoLetgetLetterInCenterException();
-                } else if (word.getOrigin().getY() > 7 ||
-                        word.getOrigin().getY() + word.getLetters().size() < 7) {
-                    // throw new NoLetgetLetterInCenterException();
-                }
-            } else {
-                if(word.getOrigin().getY() != 7) {
-                    // throw new NoLetgetLetterInCenterException();
-                } else if(word.getOrigin().getX() > 7 || word.getOrigin().getX() + word.getLetters().size() < 7) {
-                    // throw new NoLetgetLetterInCenterException();
-                }
-            }
-            validPosition = true;
-        }
+        validPosition = checkValid(validPosition, word);
 
         int wordScore = 0;
         int extraWordsScore = 0;
@@ -134,21 +137,19 @@ public class Board{
 
         currentTile = word.getOrigin();
 
-        for (Letter p : word.getLetters()) {
-            // If the Letter was already inserted we don't want to
-            // compute the score of its opposite direction
+        for (Letter l : word.getLetters()) {
             while (!currentTile.isEmpty()) {
                 newWord.add(currentTile.getLetter().getLetter());
                 wordScore += currentTile.getLetter().getVal();
                 currentTile = getNextTile(currentTile, word.getDirection());
                 validPosition = true;
             }
-            newWord.add(p.getLetter());
-            wordScore += p.getVal() * currentTile.getLetterMultiplier();
+            newWord.add(l.getLetter());
+            wordScore += l.getVal() * currentTile.getLetterMultiplier();
             wordMultiplier *= currentTile.getWordMultiplier();
-            extraWordsScore += checkOppositeDirection(p, currentTile, oppositeDir);
+            extraWordsScore += checkOppositeDirection(l, currentTile, oppositeDir);
 
-            if (word.getLetters().indexOf(p) != word.getLetters().size() - 1)
+            if (word.getLetters().indexOf(l) != word.getLetters().size() - 1)
                 currentTile = getNextTile(currentTile, word.getDirection());
         }
 

@@ -1,4 +1,4 @@
-import java.util.HashMap;
+package Model;
 
 public class Letter {
 	private Character letter;
