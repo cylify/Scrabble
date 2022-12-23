@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Player {
-	private String name;
-	private int playerScore;
+	protected String name;
+	protected int playerScore;
 	private ArrayList<Letter> playerRack;
 	protected final int rackSize = 7;
 
