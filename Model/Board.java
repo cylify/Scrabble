@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import Exceptions.*;
 
 public class Board{
 	private final int board_size = 16;
@@ -28,18 +29,10 @@ public class Board{
                 score += currentTile.getLetter().getVal();
                 newWord.add(0, currentTile.getLetter().getLetter());
             }
-            try {
-                currentTile = getPreviousTile(currentTile, direction);
-            } catch (OutOfBoundsException e) {
-                break;
-            }
+            currentTile = getPreviousTile(currentTile, direction);
         } while(!currentTile.isEmpty());
 
-        try {
-            currentTile = getNextTile(tile, direction);
-        } catch (OutOfBoundsException e) {
-
-        }
+        currentTile = getNextTile(tile, direction);
 
         do {
             if (!currentTile.isEmpty()) {
@@ -47,11 +40,7 @@ public class Board{
                 newWord.add(currentTile.getLetter().getLetter());
             } else
                 break;
-            try {
-                currentTile = getNextTile(currentTile, direction);
-            } catch (OutOfBoundsException e) {
-                break;
-            }
+            currentTile = getNextTile(currentTile, direction);
         } while (!currentTile.isEmpty());
 
         String nw = "";
@@ -90,14 +79,14 @@ public class Board{
         }
     }
 
-    public int playWord(Word word) {
+    public int playWord(Word word) throws OutOfBoundsException, AloneWordException {
         int score = checkInsertion(word);
         insertWord(word);
 
         return score;
     }
 
-    public int checkInsertion(Word word) {
+    public int checkInsertion(Word word) throws OutOfBoundsException, AloneWordException {
         boolean validPosition = false;
 
         if (board[7][7].isEmpty()) {
@@ -133,17 +122,15 @@ public class Board{
         Tile currentTile = word.getOrigin();
 
         do {
-            try {
-                currentTile = getPreviousTile(currentTile, word.getDirection());
-                if (!currentTile.isEmpty()) {
-                    newWord.add(0, currentTile.getLetter().getLetter());
-                    wordScore += currentTile.getLetter().getVal();
-                    validPosition = true;
-                }
-            } catch (OutOfBoundsException e) {
-                break;
+            currentTile = getPreviousTile(currentTile, word.getDirection());
+            if(!currentTile.isEmpty()) {
+                newWord.add(0, currentTile.getLetter().getLetter());
+                wordScore += currentTile.getLetter().getVal();
+                validPosition = true;
+            } else {
+
             }
-        } while (!currentTile.isEmpty());
+        } while(!currentTile.isEmpty());
 
         currentTile = word.getOrigin();
 
@@ -165,18 +152,15 @@ public class Board{
                 currentTile = getNextTile(currentTile, word.getDirection());
         }
 
-        try {
-            do {
-                currentTile = getNextTile(currentTile, word.getDirection());
-                if (!currentTile.isEmpty()) {
-                    newWord.add(currentTile.getLetter().getLetter());
-                    wordScore += currentTile.getLetter().getVal();
-                    validPosition = true;
-                }
-            } while (!currentTile.isEmpty());
-        } catch (OutOfBoundsException e) {
 
-        }
+        do {
+            currentTile = getNextTile(currentTile, word.getDirection());
+            if (!currentTile.isEmpty()) {
+                newWord.add(currentTile.getLetter().getLetter());
+                wordScore += currentTile.getLetter().getVal();
+                validPosition = true;
+            }
+        } while(!currentTile.isEmpty());
 
         String nw = "";
         for (char c : newWord) nw += c;
@@ -188,7 +172,6 @@ public class Board{
 
         if(!validPosition) 
             throw new AloneWordException();
-        
 
         int totalScore = wordScore * wordMultiplier + extraWordsScore;
 

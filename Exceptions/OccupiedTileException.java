@@ -1,5 +1,5 @@
 package Exceptions;
-import Scrabble.model.Tile;
+import Scrabble.Model.Tile;
 
 public class OccupiedTileException extends Exception {
     private Tile tile;
@@ -10,6 +10,6 @@ public class OccupiedTileException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Error, the Tile " + tile.toString() + " is occupied by " + tile.getLetter().toString();
+        return "Error. The Tile " + tile.toString() + " is occupied by " + tile.getLetter().toString() + ".";
     }
 }
