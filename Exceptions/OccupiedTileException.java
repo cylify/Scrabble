@@ -1,5 +1,4 @@
 package Exceptions;
-import Scrabble.Model.Tile;
 
 public class OccupiedTileException extends Exception {
     private Tile tile;
