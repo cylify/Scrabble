@@ -18,7 +18,7 @@ public class Board{
 		return board[x][y];
 	}
 
-    private int checkOppositeDirection(Letter letter, Tile tile, Direction direction) {
+    private int checkOppositeDirection(Letter letter, Tile tile, Direction direction) throws WrongWordException, OutOfBoundsException {
         int score = 0;
         int multiplier = 1;
         ArrayList<Character> newWord = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Board{
             nw += c;
 
         if(!Dictionary.wordExists(nw) && nw.length() > 1)
-            // throw new WrongWordException(nw);
+            throw new WrongWordException(nw);
 
         if(score > 0)
             System.out.println("Opposite word: " + nw + "\tScore: " + Integer.toString(score * multiplier));
@@ -58,18 +58,18 @@ public class Board{
         return score * multiplier;
     }
 
-	private Tile getNextTile(Tile currentTile, Direction dir) {
+	private Tile getNextTile(Tile currentTile, Direction dir) throws OutOfBoundsException {
         try {
             if(dir == Direction.HORIZONTAL)
                 return board[currentTile.getX() + 1][currentTile.getY()];
             else
                 return board[currentTile.getX()][currentTile.getY() + 1];
         } catch(Exception e) {
-            throw new IllegalArgumentException();
+            throw new OutOfBoundsException();
         }
     }
 
-    private void insertWord(Word word) {
+    private void insertWord(Word word) throws OutOfBoundsException {
         Tile currentTile = word.getOrigin();
         for(Letter p : word.getLetters()) {
             while(!currentTile.isEmpty()) {
@@ -81,7 +81,7 @@ public class Board{
         }
     }
 
-    public int playWord(Word word) throws OutOfBoundsException, AloneWordException, NoLetterInCenterException {
+    public int playWord(Word word) throws OutOfBoundsException, AloneWordException, NoLetterInCenterException, WrongWordException {
         int score = checkInsertion(word);
         insertWord(word);
 
@@ -106,7 +106,7 @@ public class Board{
         return validPosition;
     }
 
-    public int checkInsertion(Word word) throws OutOfBoundsException, AloneWordException, NoLetterInCenterException {
+    public int checkInsertion(Word word) throws OutOfBoundsException, AloneWordException, NoLetterInCenterException, WrongWordException {
         boolean validPosition = false;
 
         validPosition = checkValid(validPosition, word);

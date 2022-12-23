@@ -85,7 +85,5 @@ class Scrabble {
         return bestPlayer;
     }
 
-    public Bag getBag() {
-        return bag;
-    }
+    public Bag getBag() { return bag; }
 }

@@ -1,12 +1,13 @@
 package Model;
 
-
+import Exceptions.NoLettersInBagException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Player {
 	protected String name;
 	protected int playerScore;
+
 	private ArrayList<Letter> playerRack;
 	protected final int rackSize = 7;
 
@@ -61,7 +62,11 @@ public class Player {
 		playerRack.remove(letter);
 	}
 
-	public void refillRack(Bag bag) {
+	public void mixLetters() {
+		Collections.shuffle(playerRack);
+	}
+
+	public void refillRack(Bag bag) throws NoLettersInBagException {
 		while(!rackFilled()) {
 			addLetter(bag.takeLetter());
 		}
