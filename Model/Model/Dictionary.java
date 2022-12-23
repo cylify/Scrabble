@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Dictionary {
-	public static Scanner in = new Scanner(System.in);
 	private static ArrayList<String> words;
 	private static Dictionary dict = new Dictionary();
 
@@ -55,9 +54,9 @@ public class Dictionary {
         ArrayList<Character> l = new ArrayList<Character>();
         ArrayList<Character> w = new ArrayList<Character>();
 
-        for (int i = 0; i < letters.length(); i++)
+        for(int i = 0; i < letters.length(); i++)
             l.add(letters.charAt(i));
-        for (int i = 0; i < word.length(); i++)
+        for(int i = 0; i < word.length(); i++)
             w.add(word.charAt(i));
 
         return wordFits(l, w);
@@ -65,8 +64,8 @@ public class Dictionary {
 
     private static boolean wordFits(ArrayList<Character> letters, ArrayList<Character> word) {
         ArrayList<Character> l = new ArrayList<>(letters);
-        for (char c : word) {
-            if (l.contains(c))
+        for(char c : word) {
+            if(l.contains(c))
                 l.remove(l.indexOf(c));
             else
                 return false;
@@ -76,32 +75,54 @@ public class Dictionary {
 
     public static ArrayList<String> getWordsWith(ArrayList<Character> letters) {
         ArrayList<String> validWords = new ArrayList<>();
-        for (String w : Dictionary.words) {
+        for(String w : Dictionary.words) {
             ArrayList<Character> word = new ArrayList<>();
-            for (int i = 0; i < w.length(); i++)
+            for(int i = 0; i < w.length(); i++)
                 word.add(w.charAt(i));
-            if (wordFits(letters, word))
+            if(wordFits(letters, word))
                 validWords.add(w);
         }
         return validWords;
     }
 
-    public static ArrayList<Word> getWordsForMiddle(ArrayList<Letter> letters) {
-        ArrayList<Word> words = new ArrayList<>();
+    // public static ArrayList<Word> getWordsForMiddle(ArrayList<Letter> letters) {
+    //     ArrayList<Word> words = new ArrayList<>();
 
-        ArrayList<Character> letter = new ArrayList<>();
-        for (Letter l : letters)
-            letter.add(l.getLetter());
+    //     ArrayList<Character> letter = new ArrayList<>();
+    //     for (Letter l : letters)
+    //         letter.add(l.getLetter());
 
-        for (String str : getWordsWith(letter)) {
-            ArrayList<Letter> l = new ArrayList<>();
-            ArrayList<Letter> wordPieces = new ArrayList<>();
-            l.addAll(letters);
+    //     for (String str : getWordsWith(letter)) {
+    //         ArrayList<Letter> l = new ArrayList<>();
+    //         ArrayList<Letter> wordPieces = new ArrayList<>();
+    //         l.addAll(letters);
 
-            for (char c : str.toCharArray()) {
-                for (Letter ls : l) {
-                    //if (letter.getLetter() == c.)
+    //         for (char c : str.toCharArray()) {
+    //             for (Letter ls : l) {
+    //                 //if (letter.getLetter() == c.)
+    //             }
+    //         }
+    //     }
+
+    //     return words;
+    // }
+
+    public static ArrayList<String> getWordsContaining(ArrayList<Character> letters, String substring) {
+        ArrayList<String> words = new ArrayList<>();
+
+        for (String word : Dictionary.words) {
+            String w = word;
+            if (w.contains(substring.toLowerCase()) && (word.length() != substring.length())) {
+                w = w.replace(substring.toLowerCase(), "");
+                ArrayList<Character> l = new ArrayList<>(letters);
+                boolean insert = true;
+                for (int i = 0; i < w.length() && insert; i++) {
+                    if (l.contains(w.charAt(i)))
+                        l.remove((Object) w.charAt(i));
+                    else
+                        insert = false;
                 }
+                if (insert) words.add(word);
             }
         }
 
